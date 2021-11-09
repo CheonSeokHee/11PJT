@@ -72,13 +72,19 @@
 	              <li class="dropdown">
 	                     <a  href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 	                         <span >상품구매</span>
+	                         
+	                         
 	                         <span class="caret"></span>
 	                     </a>
 	                     <ul class="dropdown-menu">
 	                         <li><a href="#">상 품 검 색</a></li>
 	                         
 	                         <c:if test="${sessionScope.user.role == 'user'}">
-	                           <li><a href="#">구매이력조회</a></li>
+	                   		  <ul class="nav nav-pills" role="tablist">
+ 		 						<li role="presentation"><a href="#">구매이력조회<span class="badge">3</span></a></li>
+								</ul>    
+								
+<!-- 	                           <li><a href="#">구매이력조회</a></li> -->
 	                         </c:if>
 	                         
 	                         <li><a href="#">최근본상품</a></li>

@@ -248,8 +248,6 @@ $(function() {
 				    
 </form>
 </div>
-
-
 </div>
 
  <table class="table table-hover table-striped" >
