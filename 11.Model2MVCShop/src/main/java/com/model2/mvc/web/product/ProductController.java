@@ -1,19 +1,13 @@
 package com.model2.mvc.web.product;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.DiskFileUpload;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,13 +17,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
 import com.model2.mvc.service.domain.Product;
 import com.model2.mvc.service.product.ProductService;
-import com.model2.mvc.service.product.impl.ProductServiceImpl;
 
 @Controller
 @RequestMapping("/product/*")
@@ -55,7 +49,9 @@ public class ProductController {
 	//@RequestMapping("/addProductView.do")
 	@RequestMapping(value="addProduct",method=RequestMethod.GET)
 	public ModelAndView addProductView() throws Exception {
+		
 
+		
 		System.out.println("/addProduct : GET");
 		
 		ModelAndView modelAndView = new ModelAndView();
@@ -63,16 +59,38 @@ public class ProductController {
 		return modelAndView;
 	}
 	
+	private static final String FILE_SERVER_PATH = "C:\\Users\\aiacademy\\git\\11PJT\\11.Model2MVCShop\\src\\main\\webapp\\images\\uploadFiles";
+	
+	
 	//@RequestMapping("/addProduct.do")
 	@RequestMapping(value="addProduct", method=RequestMethod.POST)
-	public ModelAndView addProduct( @ModelAttribute("product") Product product , HttpServletRequest request) throws Exception {
-
+	public ModelAndView addProduct( @ModelAttribute("product") Product product , HttpServletRequest request,
+									@RequestParam("proImage") MultipartFile proImage ) throws Exception {
+		
+		ModelAndView modelAndView = new ModelAndView();
+		
+		if(!proImage.getOriginalFilename().isEmpty()) {
+			
+			
+			proImage.transferTo(new File(FILE_SERVER_PATH,proImage.getOriginalFilename()));
+			
+			modelAndView.addObject("msg", "File uploaded successfully.");
+			
+			System.out.println("파일 업로드 성공!!!");
+			
+		}else {
+			modelAndView.addObject("msg", "Please select a valid mediaFile..");
+		}
+		
+		
+		product.setFileName(proImage.getOriginalFilename());
+		
 		System.out.println("/addProduct : POST");
 		//Business Logic
 
 		productService.addProduct(product);
-		ModelAndView modelAndView = new ModelAndView();
 		
+	
 		modelAndView.addObject("product", product);
 		modelAndView.setViewName("forward:/product/addProduct.jsp");
 		
@@ -148,8 +166,10 @@ public class ProductController {
 		// Model 과 View 연결
 		
 		ModelAndView modelAndView = new ModelAndView();
+		
 		modelAndView.addObject("product", product);
 		modelAndView.setViewName("forward:/product/updateProductView.jsp");
+		
 		return modelAndView;
 	}
 	

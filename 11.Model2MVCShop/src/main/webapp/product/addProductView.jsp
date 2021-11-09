@@ -66,7 +66,7 @@ function fncAddProduct(){
   
 	}
 	
-   $("form").attr("method" , "POST").attr("action" ,"/product/addProduct").submit();
+	$("form").attr("method" , "POST").attr("action" ,"/product/addProduct").attr('enctype','multipart/form-data').submit();
 }
 
 	$(function() {
@@ -91,31 +91,7 @@ function fncAddProduct(){
 		
 				$("form")[0].reset();
 		});
-		
-		
-		  $("#fileName").change(function() {
-			  
-		   if(this.files && this.files[0]) {
-			   
-		    var reader = new FileReader;
-		    
-			    
-		    reader.onload = function(data) {
-		    	
-		    alert("사진 업로드 가즈아~~");
-		    	
-		     $(".form-control img").attr("src", data.target.result).width(500);    
-		     
-		    
-		    }		    
-		    reader.readAsDataURL(this.files[0]);
-		    
-		    alert("사진 업로드 가즈아~~" +this.files[0]);
-		   }
-		   
-		  });
-	});	
-
+	 });
 	
 	
 </script>
@@ -166,13 +142,14 @@ function fncAddProduct(){
 		    <div class="form-group">
 		    <label for="fileName" class="col-sm-offset-1 col-sm-3 control-label">상품 이미지</label>
 		    <div class="col-sm-4">
-		      <input type="file" class="form-control" id="fileName" name="File" ><img src=""/>
+		      <input type="file" class="form-control" id="fileName" name="proImage" ><img src=""/>
 		    </div>
 		  </div>
-<!-- <div class="content"> -->
+		  
+<!--   <div class="form-group"> -->
 <!-- 		<br/><br/> -->
 <!-- 		<h3>파일 업로드</h3> -->
-<!-- 		<form action="/product/upload.do" method="post" enctype="multipart/form-data"> -->
+<!-- 		<form action="/product/addProduct" method="post" enctype="multipart/form-data"> -->
 <!-- 		  <table> -->
 <!-- 		    <tr> -->
 <!-- 		      <td>Select File</td> -->
