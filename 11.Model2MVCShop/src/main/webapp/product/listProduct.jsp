@@ -102,14 +102,16 @@ $(function() {
 	 
 	if(menu=="manage"){
 		
-	$("td:nth-child(2)" ).css("color" , "blue");
-	$( "td:nth-child(2) " ).css("background-color" , "gray");
-	
-	
+		
 	$( "td:nth-child(2)" ).on("click" , function() {
+		
+	var proTranCode = $(this).attr("data-proTranCode");
+	
+	if(proTranCode == '000'){
 			//Debug..
 			
 			//alert( $( this ).text().trim() );
+			
 			
 			
 			var prodNo = $(this).attr("data-prodNo");
@@ -148,11 +150,21 @@ $(function() {
 					$("h6").remove();
 					$( "#"+prodNo+"" ).html(displayValue);
 				}								
-			});			
+			});	
+			
+	} if(proTranCode == '003'){
+		
+		
+		alert("상품수정이 불가합니다");
+	}
 			//self.location ="/product/updateProduct?prodNo="+$(this).find("input[name=prodNo]").val();
 			
 	
 	});
+	
+	$("td:nth-child(2)" ).css("color" , "blue");
+	$( "td:nth-child(2) " ).css("background-color" , "gray");
+	
 	
 	$( "td:nth-child(6)"  ).on("click" , function() {
 		//Debug..
@@ -161,11 +173,9 @@ $(function() {
 		alert($(this).attr("data-menu"));
 		
 	    self.location ="/purchase/updateTranCodeByProd?ProTranCode=" +$(this).attr("data-proTranCode") +
-	    		                                                 "&prodNo=" + $(this).attr("data-prodNo") + "&menu=" +$(this).attr("data-menu");
-				
+	    		                                                 "&prodNo=" + $(this).attr("data-prodNo") + "&menu=" +$(this).attr("data-menu");				
 		//self.location ="/purchase/updateTranCodeByProd?ProTranCode="+$(this).attr(data-proTranCode)+$(this).attr(data-tranNo);
-		
-		
+				
 });
 		
 	}

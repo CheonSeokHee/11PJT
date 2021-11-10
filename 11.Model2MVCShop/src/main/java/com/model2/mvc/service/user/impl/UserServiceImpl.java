@@ -72,4 +72,10 @@ public class UserServiceImpl implements UserService{
 		userDao.deleteUser(user);		
 	}
 
+	public User userIdCount(String userId) throws Exception {
+		
+		return userDao.userIdCount(userId);
+		
+	}
+
 }

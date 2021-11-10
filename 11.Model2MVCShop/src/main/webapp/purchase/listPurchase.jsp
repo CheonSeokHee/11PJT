@@ -156,13 +156,12 @@ $(function() {
 						
 	});
 	 
-	 $("td:nth-child(7)").on("click" , function() {
+	 $("td:nth-child(6)").on("click" , function() {
 			//Debug..
 			
 			if($(this).attr("data-delivered") != '003'){
 				
-				
-			
+						
 			alert( $( this ).text().trim());
 			
 			
@@ -181,8 +180,8 @@ $(function() {
 		 $( "td:nth-child(2)").css("color" , "white");
 		 $( "td:nth-child(2)").css("background-color" , "brown");
 		 
-		 $("td:nth-child(7)").css("color" , "yellow");
-		 $("td:nth-child(7)").css("background-color" , "gray");
+		 $("td:nth-child(6)").css("color" , "yellow");
+		 $("td:nth-child(6)").css("background-color" , "gray");
 		 
 		 $("h7").css("color" , "red");
 		
@@ -280,6 +279,7 @@ $(function() {
 		<c:if test = "${purchase.tranCode=='000'}">
 			
 			∆«∏≈¡ﬂ
+			
 		</c:if>
 		<c:if test = "${purchase.tranCode=='001'}">
 			

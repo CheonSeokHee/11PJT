@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.model2.mvc.common.Page;
 import com.model2.mvc.common.Search;
+import com.model2.mvc.service.domain.Purchase;
 import com.model2.mvc.service.domain.User;
+import com.model2.mvc.service.purchase.PurchaseService;
 import com.model2.mvc.service.user.UserService;
 
 
@@ -30,6 +32,10 @@ public class UserController {
 	@Autowired
 	@Qualifier("userServiceImpl")
 	private UserService userService;
+	
+//	@Autowired
+//	@Qualifier("purchaseServiceImpl")
+//	private PurchaseService purchaseservice;
 	//setter Method 구현 않음
 		
 	public UserController(){
@@ -110,16 +116,38 @@ public class UserController {
 		return "redirect:/user/loginView.jsp";
 	}
 	
+	
 	@RequestMapping( value="login", method=RequestMethod.POST )
-	public String login(@ModelAttribute("user") User user , HttpSession session ) throws Exception{
+	public String login(@ModelAttribute("user") User user , HttpSession session,
+			            @RequestParam("userId") String userId ) throws Exception{
 		
 		System.out.println("/user/login : POST");
 		//Business Logic
+		
+		
 		User dbUser=userService.getUser(user.getUserId());
+		
+		
+		User userCount =userService.userIdCount(userId);
+		
+				
+		int dbUserId = userCount.getUserCount();
+							
+		System.out.println("user가 구매한 상품 수!!!! " +  dbUserId);
+				
+		if(dbUserId == 0 || dbUserId != 0) {
+			
+			session.setAttribute("userCount", dbUserId);
+						
+		}
+		
 		
 		if( user.getPassword().equals(dbUser.getPassword())){
 			session.setAttribute("user", dbUser);
 		}
+						
+		session.setAttribute("", dbUser);
+		
 		
 		return "redirect:/index.jsp";
 	}
@@ -184,10 +212,10 @@ public class UserController {
 			
 		String viewPass = user.getPassword();
 		System.out.println(viewPass);
-		
-		
+			
 		String sessionPass = ((User)request.getSession(true).getAttribute("user")).getPassword();
 		System.out.println(sessionPass);
+		
 		
 		if(!(sessionPass.equals(viewPass))) {
 			
@@ -196,6 +224,7 @@ public class UserController {
 		return "redirect:/user/deleteUser.jsp";
 		
 		}
+		
 		userService.deleteUser(user);
 		
 		session.removeAttribute("user");
@@ -206,6 +235,16 @@ public class UserController {
 		
 	}
 	
-	
+//	
+//	public String userIdCount(HttpSession session ) {
+//		
+//		
+//		
+//		
+//		return null;
+//		
+//	}
+//	
+//	
 	
 }

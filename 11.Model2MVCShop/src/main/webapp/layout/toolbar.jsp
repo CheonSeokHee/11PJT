@@ -81,7 +81,7 @@
 	                         
 	                         <c:if test="${sessionScope.user.role == 'user'}">
 	                   		  <ul class="nav nav-pills" role="tablist">
- 		 						<li role="presentation"><a href="#">구매이력조회<span class="badge">3</span></a></li>
+ 		 						<li role="presentation"><a href="#">구매이력조회<span class="badge">${userCount}</span></a></li>
 								</ul>    
 								
 <!-- 	                           <li><a href="#">구매이력조회</a></li> -->

@@ -24,6 +24,12 @@ public interface UserService {
 	// 회원 ID 중복 확인
 	public boolean checkDuplication(String userId) throws Exception;
 	
+	
 	public void deleteUser(User user) throws Exception;
+		
+	
+	public User userIdCount(String userId)  throws Exception;
+
+
 	
 }

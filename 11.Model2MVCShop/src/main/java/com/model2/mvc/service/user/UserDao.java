@@ -26,4 +26,6 @@ public interface UserDao {
 
 	
 	public void deleteUser(User user) throws Exception;
+	
+	public User  userIdCount(String userId)  throws Exception;
 }

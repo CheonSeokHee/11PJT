@@ -23,6 +23,7 @@ public class User {
 	//////////////////////////////////////////////////////////////////////////////////////////////
 	// JSON ==> Domain Object  Binding을 위해 추가된 부분
 	private String regDateString;
+	private int userCount;
 
 	
 	
@@ -143,5 +144,13 @@ public class User {
 
 	public void setRegDateString(String regDateString) {
 		this.regDateString = regDateString;
+	}
+
+	public int getUserCount() {
+		return userCount;
+	}
+
+	public void setUserCount(int userCount) {
+		this.userCount = userCount;
 	}
 }

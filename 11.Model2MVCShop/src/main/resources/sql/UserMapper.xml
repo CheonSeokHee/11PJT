@@ -17,6 +17,8 @@
 		<result property="addr" 				column="addr" 					jdbcType="VARCHAR" />
 		<result property="email" 			column="email" 				jdbcType="NUMERIC"  />
 		<result property="regDate" 		column="reg_date" 			jdbcType="DATE" />
+		<result property="userCount" 		column="user_count" 			jdbcType="NUMERIC" />
+
 	</resultMap>
 	
 	<!-- SQL : INSERT -->
@@ -108,12 +110,11 @@
 <!-- 	  select count(*) from users where userId = #{userId} -->
 	  
 <!-- 	 </select> -->
-	 <select id="userIdCount" parameterType="user">
-	 
-	 select count(*)
-	 from transaction
-	 where buyer_Id = #{value}
-	 
+
+	<select id="userIdCount" parameterType="string" resultMap="userSelectMap">
+	select count(*) user_count
+	from transaction
+	where buyer_Id = #{value}
 	 </select>
 	 
 </mapper>

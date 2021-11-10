@@ -56,4 +56,13 @@ public class UserDaoImpl implements UserDao{
 		sqlSession.delete("UserMapper.deleteUser", user);
 		
 	}
+	
+	
+	public User userIdCount(String userId) throws Exception {
+		
+//		sqlSession.selectOne("UserMapper.userIdCount", userId);
+		
+		return sqlSession.selectOne("UserMapper.userIdCount", userId);
+		
+	}
 }
